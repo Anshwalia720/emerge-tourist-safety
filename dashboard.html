@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>EMERGE – Dashboard</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body{
+  margin:0;
+  font-family:'Segoe UI',sans-serif;
+  background:linear-gradient(180deg,#0B1220,#111827);
+  color:white;
+}
+.container{
+  max-width:420px;
+  margin:auto;
+  padding:20px;
+}
+.header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+.header h1{margin:0;font-size:26px;}
+.header p{margin:0;font-size:14px;opacity:.7;}
+.avatar{
+  width:42px;height:42px;background:#3b82f6;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;font-weight:bold;
+}
+.status{
+  background:#1f2937;padding:14px;border-radius:12px;
+  margin:20px 0;color:#22c55e;text-align:center;
+}
+.card{
+  background:#1f2937;border-radius:16px;padding:25px;
+  text-align:center;margin-bottom:20px;cursor:pointer;
+}
+.grid{
+  display:grid;grid-template-columns:1fr 1fr;gap:15px;
+}
+.feature{
+  background:#1f2937;border-radius:14px;padding:20px;
+  text-align:center;cursor:pointer;
+}
+.feature span{font-size:22px;}
+.feature h3{margin:8px 0 4px;}
+.feature p{font-size:13px;opacity:.7;}
+.logout{
+  background:#3b82f6;border-radius:30px;padding:12px;
+  text-align:center;margin:30px 0 80px;cursor:pointer;
+}
+.sos{
+  position:fixed;bottom:20px;left:50%;transform:translateX(-50%);
+  background:#dc2626;width:70px;height:70px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-weight:bold;font-size:18px;cursor:pointer;
+  animation:pulse 1.5s infinite;
+}
+@keyframes pulse{
+  0%{box-shadow:0 0 0 0 rgba(220,38,38,.7);}
+  70%{box-shadow:0 0 0 20px rgba(220,38,38,0);}
+  100%{box-shadow:0 0 0 0 rgba(220,38,38,0);}
+}
+
+/* FAKE MAP MODAL */
+.map-modal{
+  display:none;
+  position:fixed;
+  top:0;left:0;
+  width:100%;height:100%;
+  background:#020617;
+  z-index:1000;
+}
+.map-header{
+  padding:16px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  background:#0f172a;
+}
+.map-area{
+  position:relative;
+  height:100%;
+  background:
+    linear-gradient(#1e293b 1px, transparent 1px),
+    linear-gradient(90deg, #1e293b 1px, transparent 1px);
+  background-size:40px 40px;
+}
+.marker{
+  position:absolute;
+  top:50%;left:50%;
+  transform:translate(-50%,-50%);
+  font-size:24px;
+}
+.zone{
+  position:absolute;
+  border:2px dashed red;
+  width:120px;height:120px;
+  top:40%;left:30%;
+  opacity:.6;
+}
+.info{
+  position:absolute;
+  bottom:20px;
+  left:50%;
+  transform:translateX(-50%);
+  background:#1f2937;
+  padding:12px 20px;
+  border-radius:12px;
+  font-size:14px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div>
+      <h1>EMERGE</h1>
+      <p id ="welcomeText">Welcome!</p>
+    </div>
+    <div class="avatar">T</div>
+  </div>
+
+  <!-- STATUS -->
+  <div class="status">
+    ● Status: Connected (GPS Active)
+  </div>
+
+  <!-- MAP -->
+  <div class="card" onclick="openMap()">
+    <h2>🗺 Live Map View</h2>
+    <p>AI Predictive Risk Mapping: Active</p>
+  </div>
+
+  <!-- FEATURES -->
+  <div class="grid">
+    <div class="feature" onclick="aiRoutes()">
+      <span>🧠</span><h3>AI Safer Routes</h3><p>Risk-assessed paths</p>
+    </div>
+    <div class="feature" onclick="digitalID()">
+      <span>🔐</span><h3>Secure Digital ID</h3><p>Blockchain verified</p>
+    </div>
+    <div class="feature" onclick="manageZones()">
+      <span>📍</span><h3>Manage Zones</h3><p>Geo-fencing alerts</p>
+    </div>
+    <div class="feature" onclick="incidentFeed()">
+      <span>📢</span><h3>Incident Feed</h3><p>Automated reports</p>
+    </div>
+  </div>
+
+  <!-- LOGOUT -->
+  <div class="logout" onclick="logout()">Logout</div>
+</div>
+
+<!-- SOS -->
+<div class="sos" onclick="sendSOS()">SOS</div>
+
+<!-- FAKE MAP MODAL -->
+<div class="map-modal" id="mapModal">
+  <div class="map-header">
+    <h3>Live Safety Map</h3>
+    <button onclick="closeMap()">Close</button>
+  </div>
+  <div class="map-area">
+    <div class="marker">📍 You</div>
+    <div class="zone"></div>
+    <div class="info">Red zone detected • Avoid area</div>
+  </div>
+</div>
+
+<script>
+
+function sendSOS(){
+  alert("🚨 SOS Activated!\nLocation shared with emergency services (Demo)");
+}
+function openMap(){
+  document.getElementById("mapModal").style.display="block";
+}
+function closeMap(){
+  document.getElementById("mapModal").style.display="none";
+}
+function aiRoutes(){
+  alert("🤖 AI calculated safest route avoiding red zones (Demo)");
+}
+function digitalID(){
+  alert("🔐 Digital ID verified successfully (Demo)");
+}
+function manageZones(){
+  alert("📍 Geo-fencing zones loaded (Demo)");
+}
+function incidentFeed(){
+  alert("📰 Nearby incidents displayed (Demo)");
+}
+function logout(){
+  window.location.href="login.html";
+}
+const userName = localStorage.getItem("loggedInUser");
+if(userName){
+  document.getElementById("welcomeText").innerText =
+    "Welcome, " + userName + "!";
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>EMERGE – Register</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body{
+  margin:0;
+  font-family:'Segoe UI',sans-serif;
+  background:linear-gradient(180deg,#0B1220,#111827);
+  color:white;
+}
+.container{
+  max-width:400px;
+  margin:auto;
+  padding:40px 20px;
+  text-align:center;
+}
+.logo{
+  font-size:32px;
+  font-weight:bold;
+}
+.subtitle{
+  opacity:.7;
+  margin-bottom:30px;
+}
+.card{
+  background:#1f2937;
+  padding:30px;
+  border-radius:18px;
+}
+input{
+  width:100%;
+  padding:14px;
+  margin-bottom:15px;
+  border:none;
+  border-radius:12px;
+  background:#111827;
+  color:white;
+}
+button{
+  width:100%;
+  padding:14px;
+  border:none;
+  border-radius:30px;
+  background:#22c55e;
+  color:white;
+  font-size:16px;
+  font-weight:bold;
+  cursor:pointer;
+}
+.link{
+  margin-top:15px;
+  font-size:14px;
+}
+.link a{
+  color:#60a5fa;
+  text-decoration:none;
+}
+</style>
+</head>
+
+<body>
+<div class="container">
+  <div class="logo">EMERGE</div>
+  <div class="subtitle">Create Account</div>
+
+  <div class="card">
+    <input type="text" placeholder="Full Name">
+    <input type="email" placeholder="Email">
+    <input type="password" placeholder="Password">
+
+    <button onclick="register()">Register</button>
+
+    <div class="link">
+      Already have an account? <a href="login.html">Login</a>
+    </div>
+  </div>
+</div>
+
+<script>
+function register(){
+  const name = document.querySelectorAll("input")[0].value;
+  const email = document.querySelectorAll("input")[1].value;
+  const password = document.querySelectorAll("input")[2].value;
+
+  if(!name || !email || !password){
+    alert("Please fill all fields");
+    return;
+  }
+
+  let users = JSON.parse(localStorage.getItem("users")) || {};
+
+  if(users[email]){
+    alert("❌ This email is already registered.\nOnly one password allowed per email.");
+    return;
+  }
+
+  // store name + password
+  users[email] = {
+    name: name,
+    password: password
+  };
+
+  localStorage.setItem("users", JSON.stringify(users));
+
+  alert("✅ Registration successful!");
+  window.location.href = "login.html";
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>EMERGE – Login</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body{
+  margin:0;
+  font-family:'Segoe UI',sans-serif;
+  background:linear-gradient(180deg,#0B1220,#111827);
+  color:white;
+}
+.container{
+  max-width:400px;
+  margin:auto;
+  padding:40px 20px;
+  text-align:center;
+}
+.logo{
+  font-size:32px;
+  font-weight:bold;
+}
+.subtitle{
+  opacity:.7;
+  margin-bottom:30px;
+}
+.card{
+  background:#1f2937;
+  padding:30px;
+  border-radius:18px;
+}
+input{
+  width:100%;
+  padding:14px;
+  margin-bottom:15px;
+  border:none;
+  border-radius:12px;
+  background:#111827;
+  color:white;
+}
+button{
+  width:100%;
+  padding:14px;
+  border:none;
+  border-radius:30px;
+  background:#3b82f6;
+  color:white;
+  font-size:16px;
+  font-weight:bold;
+  cursor:pointer;
+}
+.link{
+  margin-top:15px;
+  font-size:14px;
+}
+.link a{
+  color:#60a5fa;
+  text-decoration:none;
+}
+.loader{
+  display:none;
+  margin-top:20px;
+}
+.spinner{
+  width:40px;
+  height:40px;
+  border:4px solid #374151;
+  border-top:4px solid #3b82f6;
+  border-radius:50%;
+  margin:auto;
+  animation:spin 1s linear infinite;
+}
+@keyframes spin{
+  100%{transform:rotate(360deg);}
+}
+</style>
+</head>
+
+<body>
+<div class="container">
+  <div class="logo">EMERGE</div>
+  <div class="subtitle">Tourist Safety System</div>
+
+  <div class="card">
+    <input type="email" placeholder="Email">
+    <input type="password" placeholder="Password">
+
+    <button onclick="login()">Login</button>
+
+    <div class="loader" id="loader">
+      <div class="spinner"></div>
+      <p>Authenticating...</p>
+    </div>
+
+    <div class="link">
+      New user? <a href="register.html">Register</a>
+    </div>
+  </div>
+</div>
+
+<script>
+function login(){
+  const email = document.querySelectorAll("input")[0].value;
+  const password = document.querySelectorAll("input")[1].value;
+
+  let users = JSON.parse(localStorage.getItem("users")) || {};
+
+  if(!users[email]){
+    alert("❌ Email not registered");
+    return;
+  }
+
+  if(users[email].password !== password){
+    alert("❌ Incorrect password");
+    return;
+  }
+
+  // save logged-in user name
+  localStorage.setItem("loggedInUser", users[email].name);
+
+  document.getElementById("loader").style.display = "block";
+
+  setTimeout(()=>{
+    window.location.href = "dashboard.html";
+  },2000);
+}
+</script>
+</body>
+</html>
