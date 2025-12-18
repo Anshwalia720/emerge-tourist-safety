@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Smart Tourist — Frontend</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header>
+    <h1>Smart Tourist — Demo Frontend</h1>
+    <p>Simple SPA to exercise the Smart Tourist API (local dev)</p>
+  </header>
+
+  <main>
+    <section class="card">
+      <h2>Register Digital ID</h2>
+      <form id="form-register">
+        <input name="name" placeholder="Name" required />
+        <input name="doc" placeholder="Document" required />
+        <input name="biometric" placeholder="Biometric hash" required />
+        <button type="submit">Register</button>
+      </form>
+      <pre id="out-register" class="out"></pre>
+    </section>
+
+    <section class="card">
+      <h2>Create Geo-Zone</h2>
+      <form id="form-zone">
+        <input name="name" placeholder="Zone name" required />
+        <input name="lat" placeholder="Latitude" required />
+        <input name="lng" placeholder="Longitude" required />
+        <input name="radius_m" placeholder="Radius (meters)" required />
+        <button type="submit">Create Zone</button>
+      </form>
+      <pre id="out-zone" class="out"></pre>
+    </section>
+
+    <section class="card">
+      <h2>Position Update</h2>
+      <form id="form-position">
+        <input name="user_id" placeholder="User ID (e.g. user-1)" required />
+        <input name="lat" placeholder="Latitude" required />
+        <input name="lng" placeholder="Longitude" required />
+        <button type="submit">Send Position</button>
+      </form>
+      <pre id="out-position" class="out"></pre>
+    </section>
+
+    <section class="card">
+      <h2>SOS / Emergency</h2>
+      <form id="form-sos">
+        <input name="user_id" placeholder="User ID (optional)" />
+        <input name="lat" placeholder="Latitude" required />
+        <input name="lng" placeholder="Longitude" required />
+        <input name="message" placeholder="Message" required />
+        <label><input type="checkbox" name="panic" /> Panic</label>
+        <label><input type="checkbox" name="injury" /> Injury</label>
+        <label><input type="checkbox" name="threat" /> Threat</label>
+        <button type="submit">Send SOS</button>
+      </form>
+      <pre id="out-sos" class="out"></pre>
+    </section>
+
+    <section class="card">
+      <h2>IoT Ingest</h2>
+      <form id="form-iot">
+        <input name="device_id" placeholder="Device ID" required />
+        <input name="lat" placeholder="Latitude" required />
+        <input name="lng" placeholder="Longitude" required />
+        <input name="payload" placeholder='JSON payload (e.g. {"temp":25})' required />
+        <button type="submit">Ingest</button>
+      </form>
+      <pre id="out-iot" class="out"></pre>
+    </section>
+
+    <section class="card">
+      <h2>Predictive Risk (route)</h2>
+      <p>Enter route points as JSON array: [{"lat":..,"lng":..}, ...]</p>
+      <form id="form-predict">
+        <textarea name="points" rows="4" placeholder='[{"lat":40.7125,"lng":-74.0062}]' required></textarea>
+        <button type="submit">Score Route</button>
+      </form>
+      <pre id="out-predict" class="out"></pre>
+    </section>
+
+    <section class="card">
+      <h2>Incidents & Sensors</h2>
+      <button id="btn-list-incidents">List Incidents</button>
+      <button id="btn-list-sensors">List Sensors</button>
+      <pre id="out-list" class="out"></pre>
+    </section>
+
+  </main>
+
+  <footer>
+    <small>Backend assumed at <code>http://127.0.0.1:8000</code>. If CORS blocks requests, run the backend with CORS enabled or serve both from same origin.</small>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
